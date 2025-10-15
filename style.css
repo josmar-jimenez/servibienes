@@ -6,6 +6,7 @@
   --text: #1e2a32;
   --radius: 14px;
   font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px; /* Base font size */
 }
 
 body {
@@ -61,6 +62,7 @@ label {
   font-size: 14px;
   color: #324048;
   width: 160px;
+  flex-shrink: 0; /* Evita que la label se comprima */
 }
 
 input[type=number],
@@ -91,6 +93,7 @@ select {
 .radio-group {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap; /* Permite que los radios se envuelvan en pantallas pequeñas */
 }
 
 button.primary {
@@ -109,6 +112,12 @@ button.ghost {
   padding: 10px 16px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .summary {
@@ -159,6 +168,7 @@ button.ghost {
   border-radius: 10px;
   min-width: 100px;
   text-align: center;
+  flex: 1; /* Permite que los KPI se expandan para ocupar el espacio */
 }
 
 .amort-table {
@@ -168,6 +178,7 @@ button.ghost {
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 1rem;
 }
 
 .amort-table th {
@@ -186,7 +197,6 @@ button.ghost {
   background: #f5f9f9;
 }
 
-
 .footer {
   margin-top: 14px;
   font-size: 12px;
@@ -194,32 +204,30 @@ button.ghost {
   text-align: center;
 }
 
-@media(max-width:900px) {
-  .grid { grid-template-columns: 1fr; }
-  label { width: 130px; }
-}
-
 .dropdown-wrapper {
   position: relative;
   display: inline-block;
 }
 
-/* Botón visible solo con flecha */
 .dropdown-btn {
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--primary);
-  border-radius: 6px;
-  background-color: var(--primary);
-  color: #fff;
-  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d2dee0;
+  border-radius: 8px;
+  background-color: #f8fbfb;
   cursor: pointer;
-  text-align: center;
-  line-height: 28px;
-  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Evita que el botón se comprima */
 }
 
-/* Select oculto */
+.dropdown-btn::after {
+    content: '▼';
+    font-size: 12px;
+    color: #555;
+}
+
 .dropdown-select {
   position: absolute;
   top: 0;
@@ -228,6 +236,78 @@ button.ghost {
   height: 100%;
   opacity: 0;
   cursor: pointer;
-  min-width: 100px;
+  min-width:90px;
 }
 
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  body {
+    padding: 16px;
+  }
+
+  .form-row {
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 6px;
+  }
+
+  label {
+    width: auto; 
+  }
+
+	select {
+	  width: 100%;
+	  box-sizing: border-box;
+	}
+
+  .summary {
+    position: static; 
+    margin-top: 20px;
+  }
+}
+
+@media(max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .card {
+    padding: 12px;
+  }
+  header img {
+    height: 40px;
+  }
+  .brand h1 {
+    font-size: 18px;
+  }
+  .brand p {
+    font-size: 12px;
+  }
+  .form-row {
+    gap: 4px;
+  }
+  label {
+    font-size: 12px;
+  }
+	select {
+	  width: 100%;
+	  box-sizing: border-box;
+	}
+  .dropdown-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .big-result {
+    font-size: 20px;
+  }
+}
+}
