@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulador Hipoteca — Servibienes BCN</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="logo.png" alt="Servibienes BCN logo">
+      <div class="brand">
+        <h1>Simulador de Hipoteca</h1>
+        <p>Calcula tu cuota mensual y amortización fácilmente</p>
+      </div>
+    </header>
+
+    <main class="card grid">
+      <section>
+        <h2>Datos del préstamo</h2>
+
+        <div class="form-row">
+          <label for="price">Precio inmueble (€)</label>
+          <input id="priceProperty" type="number" min="100000" step="50000" value="250000" />
+			<div class="dropdown-wrapper">
+			  <button id="price-btn" class="dropdown-btn">▼</button>
+			  <select id="price-quick" class="dropdown-select">
+			  </select>
+			</div>
+        </div>
+
+        <div class="form-row">
+          <label for="down">Entrada (€)</label>
+		    <input id="entrance" type="number" min="25000" step="25000" value="50000" />
+			<div class="dropdown-wrapper">
+			  <button id="entrance-btn" class="dropdown-btn">▼</button>
+			  <select id="entrance-quick" class="dropdown-select">
+			  </select>
+			</div>
+        </div>
+
+        <div class="form-row">
+          <label for="province">Provincia</label>
+          <select id="province"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="bank">Banco</label>
+          <select id="bank"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="years">Años</label>
+          <input id="years" type="number" min="1" max="40" value="25" />
+        </div>
+
+        <div class="form-row">
+          <label for="rate">Interés anual (%)</label>
+          <input id="rate" type="number" min="0" step="0.01" value="3.25" />
+        </div>
+		
+		<div class="form-row">
+          <label>Tipo de interés</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tipo" value="fixed" checked> Fijo</label>
+            <label><input type="radio" name="tipo" value="variable"> Variable</label>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="primary" id="calc">Calcular</button>
+          <button class="ghost" id="reset">Restablecer</button>
+        </div>
+
+        <div class="kpi">
+          <div class="box"><div class="muted">Cuota</div><div id="kpi-cuota">€0</div></div>
+          <div class="box"><div class="muted">Intereses tot.</div><div id="kpi-intereses">€0</div></div>
+          <div class="box"><div class="muted">Capital</div><div id="kpi-capital">€0</div></div>
+        </div>
+
+        <section class="amort-section">
+          <h3>Amortización (primeros 12 meses)</h3>
+          <div id="amort-table"></div>
+        </section>
+      </section>
+
+      <aside class="summary card">
+        <h3>Resumen</h3>
+        <div class="row"><div>Préstamo solicitado</div><div id="res-prestamo">€0</div></div>
+        <div class="row"><div>Plazo</div><div id="res-plazo">0 años</div></div>
+        <div class="row"><div>Banco</div><div id="res-banco">-</div></div>
+        <div class="row"><div>Provincia</div><div id="res-provincia">-</div></div>
+        <div class="cuota"><div class="small">Cuota mensual estimada</div><div class="big-result" id="res-cuota">€0</div></div>
+
+        <div class="summary-section">
+          <h4>Gastos e Impuestos</h4>
+          <div class="row"><div>AJD</div><div id="res-ajd">€0</div></div>
+          <div class="row"><div>Impuestos</div><div id="res-impuestos">€0</div></div>
+          <div class="row"><div>Notaría</div><div id="res-notaria">€0</div></div>
+          <div class="row"><div>Registro</div><div id="res-registro">€0</div></div>
+          <div class="row"><div>Gestoría</div><div id="res-gestoria">€0</div></div>
+          <div class="row"><div>Tasación</div><div id="res-tasacion">€0</div></div>
+          <div class="row total"><div>Total gastos</div><div id="res-total-gastos">€0</div></div>
+          <div class="row total final"><div>Total con inmueble</div><div id="res-total">€0</div></div>
+        </div>
+
+        <div class="footer">Simulador no vinculante — Servibienes BCN</div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
