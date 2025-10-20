@@ -147,6 +147,7 @@ document.getElementById('reset').addEventListener('click',()=>{
   document.getElementById('entrance').value=50000;
   document.getElementById('years').value=30;
   document.getElementById('rate').value=2.50;
+  document.getElementById('province').value="Barcelona";
   update();
 });
 
