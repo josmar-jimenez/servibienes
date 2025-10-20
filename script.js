@@ -1,5 +1,4 @@
-const PROVINCIAS = ["Álava","Albacete","Alicante","Almería","Asturias","Ávila","Badajoz","Barcelona","Burgos","Cáceres","Cádiz","Cantabria","Castellón","Ciudad Real","Córdoba","Cuenca","Girona","Granada","Guadalajara","Guipúzcoa","Huelva","Huesca","Islas Baleares","Jaén","La Coruña","La Rioja","Las Palmas","León","Lérida","Lugo","Madrid","Málaga","Murcia","Navarra","Orense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza","Ceuta","Melilla"];
-const BANCOS = ['Banco Santander','BBVA','CaixaBank','Banco Sabadell','Bankinter','ING España','Abanca','Kutxabank','Unicaja Banco','Caixa Popular','Ibercaja','Cajamar'];
+const PROVINCIAS = ["Barcelona","Girona","Lérida","Tarragona"];
 
 const fmt = n => n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
 
@@ -9,12 +8,6 @@ PROVINCIAS.forEach(p => {
   const o = document.createElement('option');
   o.textContent = p;
   selProv.appendChild(o);
-});
-const selBank = document.getElementById('bank');
-BANCOS.forEach(b => {
-  const o = document.createElement('option');
-  o.textContent = b;
-  selBank.appendChild(o);
 });
 
 // selects rápidos
@@ -68,16 +61,14 @@ function getTipo(){
 }
 
 function calcularGastosYImpuestos(precio,prestamo){
-  const randomPorcentaje=(min,max)=>Math.random()*(max-min)+min;
-  const ajd = prestamo * (randomPorcentaje(0.5,1.5)/100);
-  const impuesto = precio * (randomPorcentaje(5,10)/100);
+  const impuesto = precio * 0.1;
   const notaria = precio * 0.003;
   const registro = precio * 0.001;
   const gestoria = 400;
   const tasacion = 300;
-  const totalGastos = ajd + impuesto + notaria + registro + gestoria + tasacion;
+  const totalGastos = impuesto + notaria + registro + gestoria + tasacion;
   const total = precio + totalGastos;
-  return {ajd,impuesto,notaria,registro,gestoria,tasacion,totalGastos,total};
+  return {impuesto,notaria,registro,gestoria,tasacion,totalGastos,total};
 }
 
 function update(){
@@ -85,7 +76,6 @@ function update(){
   const down=parseFloat(document.getElementById('entrance').value)||0;
   const years=parseInt(document.getElementById('years').value)||1;
   const rate=parseFloat(document.getElementById('rate').value)||0;
-  const bank=document.getElementById('bank').value;
   const province=document.getElementById('province').value;
   const tipo=getTipo();
 
@@ -97,7 +87,6 @@ function update(){
 
   document.getElementById('res-prestamo').textContent='€'+fmt(prestamo);
   document.getElementById('res-plazo').textContent=years+' años';
-  document.getElementById('res-banco').textContent=bank;
   document.getElementById('res-provincia').textContent=province+(tipo==='fixed'?' (Fijo)':' (Variable)');
   document.getElementById('res-cuota').textContent='€'+fmt(cuota);
 
@@ -106,7 +95,6 @@ function update(){
   document.getElementById('kpi-capital').textContent='€'+fmt(prestamo);
 
   const g = calcularGastosYImpuestos(price,prestamo);
-  document.getElementById('res-ajd').textContent='€'+fmt(g.ajd);
   document.getElementById('res-impuestos').textContent='€'+fmt(g.impuesto);
   document.getElementById('res-notaria').textContent='€'+fmt(g.notaria);
   document.getElementById('res-registro').textContent='€'+fmt(g.registro);
@@ -157,8 +145,8 @@ document.getElementById('calc').addEventListener('click',update);
 document.getElementById('reset').addEventListener('click',()=>{
   document.getElementById('priceProperty').value=250000;
   document.getElementById('entrance').value=50000;
-  document.getElementById('years').value=25;
-  document.getElementById('rate').value=3.25;
+  document.getElementById('years').value=30;
+  document.getElementById('rate').value=2.50;
   update();
 });
 
