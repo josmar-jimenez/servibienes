@@ -62,13 +62,11 @@ function getTipo(){
 
 function calcularGastosYImpuestos(precio,prestamo){
   const impuesto = precio * 0.1;
-  const notaria = precio * 0.003;
-  const registro = precio * 0.001;
-  const gestoria = 400;
+  const notaria = precio * 0.02;
   const tasacion = 300;
-  const totalGastos = impuesto + notaria + registro + gestoria + tasacion;
+  const totalGastos = impuesto + notaria + tasacion;
   const total = precio + totalGastos;
-  return {impuesto,notaria,registro,gestoria,tasacion,totalGastos,total};
+  return {impuesto,notaria,tasacion,totalGastos,total};
 }
 
 function update(){
@@ -97,8 +95,6 @@ function update(){
   const g = calcularGastosYImpuestos(price,prestamo);
   document.getElementById('res-impuestos').textContent='€'+fmt(g.impuesto);
   document.getElementById('res-notaria').textContent='€'+fmt(g.notaria);
-  document.getElementById('res-registro').textContent='€'+fmt(g.registro);
-  document.getElementById('res-gestoria').textContent='€'+fmt(g.gestoria);
   document.getElementById('res-tasacion').textContent='€'+fmt(g.tasacion);
   document.getElementById('res-total-gastos').textContent='€'+fmt(g.totalGastos);
   document.getElementById('res-total').textContent='€'+fmt(g.total);
