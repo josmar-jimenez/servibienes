@@ -68,6 +68,7 @@
         <div class="btn-row no-print" >
           <button class="primary" id="calc">Calcular</button>
           <button class="ghost" id="reset">Restablecer</button>
+          <button class="ghost" id="print">Imprimir</button>
         </div>
 
         <div class="kpi">
@@ -82,24 +83,73 @@
         </section>
       </section>
 
-      <aside class="summary card">
-        <h3>Resumen</h3>
-        <div class="row"><div>Préstamo solicitado</div><div id="res-prestamo">€0</div></div>
-        <div class="row"><div>Plazo</div><div id="res-plazo">0 años</div></div>
-        <div class="row"><div>Provincia</div><div id="res-provincia">-</div></div>
-        <div class="cuota"><div class="small">Cuota mensual estimada</div><div class="big-result" id="res-cuota">€0</div></div>
+	<aside class="summary card">
+	  <h3 class="summary-title">Resumen</h3>
 
-        <div class="summary-section">
-          <h4>Gastos e Impuestos</h4>
-          <div class="row"><div>Impuestos</div><div id="res-impuestos">€0</div></div>
-          <div class="row"><div>Notaría, Registro y Gestoría</div><div id="res-notaria">€0</div></div>
-          <div class="row"><div>Tasación</div><div id="res-tasacion">€0</div></div>
-          <div class="row total"><div>Total gastos</div><div id="res-total-gastos">€0</div></div>
-          <div class="row total final"><div>Total con inmueble</div><div id="res-total">€0</div></div>
-        </div>
+	  <div class="summary-data">
+		<div class="row"><div>Préstamo solicitado</div><div id="res-prestamo">€0</div></div>
+		<div class="row"><div>Plazo</div><div id="res-plazo">0 años</div></div>
+		<div class="row"><div>Provincia</div><div id="res-provincia">-</div></div>
+	  </div>
 
-        <div class="footer">Simulador no vinculante — Servibienes BCN</div>
-      </aside>
+	  <div class="cuota">
+		<div class="small">Cuota mensual estimada</div>
+		<div class="big-result" id="res-cuota">€0</div>
+	  </div>
+
+		<div class="summary-section">
+		  <h4>Gastos e Impuestos</h4>
+
+		  <div class="row">
+			<div>Impuestos</div>
+			<div class="value-edit">
+			  <span id="res-impuestos">€0</span>
+			  <button class="edit-btn" data-field="impuestos">✏️</button>
+			</div>
+		  </div>
+
+		  <div class="row">
+			<div>Notaría, Registro y Gestoría</div>
+			<div class="value-edit">
+			  <span id="res-notaria">€0</span>
+			  <button class="edit-btn" data-field="notaria">✏️</button>
+			</div>
+		  </div>
+
+		  <div class="row">
+			<div>Tasación</div>
+			<div class="value-edit">
+			  <span id="res-tasacion">€0</span>
+			  <button class="edit-btn" data-field="tasacion">✏️</button>
+			</div>
+		  </div>
+
+		  <div class="row total">
+			<div>Total gastos</div>
+			<div id="res-total-gastos">€0</div>
+		  </div>
+
+		  <div class="row total final">
+			<div>Total con inmueble</div>
+			<div id="res-total">€0</div>
+		  </div>
+		</div>
+
+	</aside>
+
+
+	<!-- Modal -->
+	<div id="inputModal" class="modal hidden">
+	  <div class="modal-content">
+		<h3 id="modal-title">Editar valor</h3>
+		<input type="number" id="modal-input" placeholder="Introduce un valor (€)" step="100"/>
+		<div class="modal-actions">
+		  <button id="modal-save">Guardar</button>
+		  <button id="modal-cancel">Cancelar</button>
+		</div>
+	  </div>
+	</div>
+
     </main>
   </div>
 

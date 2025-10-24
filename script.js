@@ -61,9 +61,9 @@ function getTipo(){
 }
 
 function calcularGastosYImpuestos(precio,prestamo){
-  const impuesto = precio * 0.1;
-  const notaria = precio * 0.02;
-  const tasacion = 300;
+  const impuesto = 0;
+  const notaria = 0;
+  const tasacion = 0;
   const totalGastos = impuesto + notaria + tasacion;
   const total = precio + totalGastos;
   return {impuesto,notaria,tasacion,totalGastos,total};
@@ -148,3 +148,54 @@ document.getElementById('reset').addEventListener('click',()=>{
 });
 
 update();
+
+// === MODAL para editar gastos/impuestos ===
+
+// Estado en memoria (persistente con localStorage)
+const gastosPersonalizados = { impuestos: null, notaria: null, tasacion: null };
+
+
+// Referencias al modal y botones
+const modal = document.getElementById('inputModal');
+const modalTitle = document.getElementById('modal-title');
+const modalInput = document.getElementById('modal-input');
+const btnSave = document.getElementById('modal-save');
+const btnCancel = document.getElementById('modal-cancel');
+let currentField = null;
+
+// Mostrar modal
+document.querySelectorAll('.edit-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentField = btn.dataset.field;
+    modalTitle.textContent = `Editar ${currentField}`;
+    const valTexto = document.getElementById(`res-${currentField}`).textContent.replace(/[€\s]/g,'');
+    modalInput.value = parseFloat(valTexto) || 0;
+    modal.classList.remove('hidden');
+    modalInput.focus();
+  });
+});
+
+// Guardar valor y actualizar pantalla
+btnSave.addEventListener('click', () => {
+  const val = parseFloat(modalInput.value) || 0;
+  gastosPersonalizados[currentField] = val;
+  modal.classList.add('hidden');
+  update(); // recalcula todo con nuevos valores
+});
+
+// Cancelar
+btnCancel.addEventListener('click', () => modal.classList.add('hidden'));
+
+// Modificamos calcularGastosYImpuestos para usar los valores personalizados
+const _originalCalc = calcularGastosYImpuestos;
+calcularGastosYImpuestos = function(precio, prestamo) {
+  const base = _originalCalc(precio, prestamo);
+  // Sobrescribir valores si el usuario los personalizó
+  if (gastosPersonalizados.impuestos !== null) base.impuesto = gastosPersonalizados.impuestos;
+  if (gastosPersonalizados.notaria !== null) base.notaria = gastosPersonalizados.notaria;
+  if (gastosPersonalizados.tasacion !== null) base.tasacion = gastosPersonalizados.tasacion;
+  base.totalGastos = base.impuesto + base.notaria + base.tasacion;
+  base.total = precio + base.totalGastos;
+  return base;
+};
+
