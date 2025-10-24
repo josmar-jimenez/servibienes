@@ -134,9 +134,13 @@ function update(){
     `;
     tbody.appendChild(row);
   }
-
+  document.getElementById("amort-table-print").innerHTML =
+  document.getElementById("amort-table").innerHTML;
 }
 
+document.getElementById('print').addEventListener('click', () => {
+  window.print();
+});
 document.getElementById('calc').addEventListener('click',update);
 document.getElementById('reset').addEventListener('click',()=>{
   document.getElementById('priceProperty').value=250000;
@@ -144,6 +148,9 @@ document.getElementById('reset').addEventListener('click',()=>{
   document.getElementById('years').value=30;
   document.getElementById('rate').value=2.50;
   document.getElementById('province').value="Barcelona";
+  gastosPersonalizados.impuestos= 0;
+  gastosPersonalizados.notaria= 0;
+  gastosPersonalizados.tasacion= 0;
   update();
 });
 

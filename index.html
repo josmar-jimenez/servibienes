@@ -104,7 +104,7 @@
 			<div>Impuestos</div>
 			<div class="value-edit">
 			  <span id="res-impuestos">€0</span>
-			  <button class="edit-btn" data-field="impuestos">✏️</button>
+			  <button class="edit-btn no-print" data-field="impuestos">✏️</button>
 			</div>
 		  </div>
 
@@ -112,7 +112,7 @@
 			<div>Notaría, Registro y Gestoría</div>
 			<div class="value-edit">
 			  <span id="res-notaria">€0</span>
-			  <button class="edit-btn" data-field="notaria">✏️</button>
+			  <button class="edit-btn no-print" data-field="notaria">✏️</button>
 			</div>
 		  </div>
 
@@ -120,7 +120,7 @@
 			<div>Tasación</div>
 			<div class="value-edit">
 			  <span id="res-tasacion">€0</span>
-			  <button class="edit-btn" data-field="tasacion">✏️</button>
+			  <button class="edit-btn no-print" data-field="tasacion">✏️</button>
 			</div>
 		  </div>
 
@@ -152,7 +152,10 @@
 
     </main>
   </div>
-
+	<section class="amort-section-print">
+	  <h3>Amortización (primeros 12 meses)</h3>
+	  <div id="amort-table-print"></div>
+	</section>
   <script src="script.js"></script>
 </body>
 </html>

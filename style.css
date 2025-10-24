@@ -333,9 +333,74 @@ button.ghost {
 }
 
 /* === RESPONSIVE === */
+.amort-section-print {
+  display: none;
+}
 @media print {
   .no-print {
+    display: none !important;
+  }
+  .amort-section-print {
+    display: block;
+    page-break-before: always;
+    margin-top: 20mm;
+  }
+  
+  /* Ajustes estéticos para tabla */
+  body {
+    background: white;
+    color: black;
+  }
+
+  .card, .summary {
+    box-shadow: none;
+    border: none;
+  }
+
+  header, .footer {
     display: none;
+  }
+
+  table.amort-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  table.amort-table th,
+  table.amort-table td {
+    border: 1px solid #ccc;
+    padding: 6px;
+  }
+  
+  /* KPI en impresión */
+  .kpi {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 0; /* quitar margen superior innecesario */
+    margin-bottom: 0; /* quitar margen inferior extra */
+  }
+
+  .kpi .box {
+    background: #f4f9fa;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 100px;
+    text-align: center;
+    flex: 1;
+    box-shadow: none;
+    color: black;
+    border: 1px solid #c6d6d8;
+    margin-bottom: 0; /* eliminar cualquier margen extra */
+  }
+
+  .kpi .box div:first-child {
+    font-weight: 500;
+  }
+
+  .kpi .box div:last-child {
+    font-weight: 700;
   }
 }
 
