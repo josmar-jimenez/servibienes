@@ -357,10 +357,6 @@ button.ghost {
     border: none;
   }
 
-  header, .footer {
-    display: none;
-  }
-
   table.amort-table {
     width: 100%;
     border-collapse: collapse;
